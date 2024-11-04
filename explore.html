@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WashWise - 세차장 탐색</title>
+  <link rel="stylesheet" href="explore.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-content" style="text-align: center;">
+      <h1>WashWise</h1>
+      <input type="text" id="search" class="search-bar" placeholder="세차장을 검색하세요" style="margin: 0 auto;">
+      <button id="search-button" class="search-button">검색</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!--지도 -->
+    <section class="map-section">
+      <div id="map" style="width: 100%; height: 100%;"></div>
+    </section>
+
+    <section class="recommend-section">
+      <h2>추천 세차장</h2>
+      <ul class="recommend-list" id="recommended-list">
+      </ul>
+    </section>
+  </div>
+
+ <!-- 카카오맵 api -->
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=f5e9bda8665dfaf9492fcb65ba25967b&libraries=services"></script>
+  <script src="explore.js"></script>
+</body>
+</html>
