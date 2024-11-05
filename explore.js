@@ -8,11 +8,10 @@ function initMap() {
     const map = new kakao.maps.Map(container, options);
     const places = new kakao.maps.services.Places();
 
-   
     places.keywordSearch('세차장', (result, status, pagination) => {
         if (status === kakao.maps.services.Status.OK) {
             displayCarWashMarkers(result, map);
-            updateRecommendedList(result);
+            updateRecommendedList(result, map);
         } else {
             console.error('세차장 검색에 실패했습니다.');
         }
@@ -32,13 +31,17 @@ function initMap() {
                 clickable: true
             });
 
-            const infoContent = `
-                <div style="padding:10px; font-size:14px;">
-                    <strong style="font-size:16px; color:#333;">${carWash.place_name}</strong><br/>
-                    <span style="color:#666;">위치: ${carWash.road_address_name || carWash.address_name}</span>
+            // 인포윈도우에 표시할 세차장 정보 내용 생성
+            const carWashInfo = `
+                <div class="info-window">
+                    <strong class="info-title">${carWash.place_name}</strong><br/>
+                    <span class="info-address">주소: ${carWash.road_address_name || carWash.address_name}</span><br/>
+                    <span class="info-phone">전화번호: ${carWash.phone || '없음'}</span><br/>
+                    <span class="info-category">카테고리: ${carWash.category_name || '정보 없음'}</span><br/>
                 </div>`;
-            const infowindow = new kakao.maps.InfoWindow({ content: infoContent });
+            const infowindow = new kakao.maps.InfoWindow({ content: carWashInfo });
 
+            // 마커 클릭 이벤트
             kakao.maps.event.addListener(marker, 'click', function () {
                 if (activeInfoWindow) {
                     activeInfoWindow.close();
@@ -47,6 +50,7 @@ function initMap() {
                 activeInfoWindow = infowindow;
             });
 
+            // 지도의 다른 부분을 클릭하면 인포윈도우 닫기
             kakao.maps.event.addListener(map, 'click', function () {
                 if (activeInfoWindow) {
                     activeInfoWindow.close();
@@ -56,19 +60,41 @@ function initMap() {
         });
     }
 
-    function updateRecommendedList(carWashList) {
+    function updateRecommendedList(carWashList, map) {
         const recommendedList = document.getElementById("recommended-list");
         recommendedList.innerHTML = '';
-        carWashList.forEach(carWash => {
+        carWashList.forEach((carWash, index) => {
             const carWashCard = document.createElement("div");
             carWashCard.classList.add("recommend-item");
             carWashCard.innerHTML = `
                 <div class="item-info">
-                    <h3>${carWash.place_name}</h3>
-                    <p>위치: ${carWash.road_address_name || carWash.address_name}</p>
+                    <h3 class="item-title">${carWash.place_name}</h3>
+                    <p class="item-address">${carWash.road_address_name || carWash.address_name}</p>
+                    <p class="item-phone">전화번호: ${carWash.phone || '없음'}</p>
                 </div>
-                <button class="reserve-button">예약 정보</button>
+                <button class="reserve-button">자세히 보기</button>
             `;
+
+            // 각 항목에 클릭 이벤트 추가
+            carWashCard.addEventListener('click', () => {
+                const markerPosition = new kakao.maps.LatLng(carWash.y, carWash.x);
+                map.setCenter(markerPosition);
+                const infoContent = `
+                    <div class="info-window">
+                        <strong class="info-title">${carWash.place_name}</strong><br/>
+                        <span class="info-address">주소: ${carWash.road_address_name || carWash.address_name}</span><br/>
+                        <span class="info-phone">전화번호: ${carWash.phone || '없음'}</span><br/>
+                        <span class="info-category">카테고리: ${carWash.category_name || '정보 없음'}</span><br/>
+                    </div>`;
+                const infowindow = new kakao.maps.InfoWindow({ content: infoContent });
+
+                if (activeInfoWindow) {
+                    activeInfoWindow.close();
+                }
+                infowindow.open(map, new kakao.maps.Marker({ position: markerPosition }));
+                activeInfoWindow = infowindow;
+            });
+
             recommendedList.appendChild(carWashCard);
         });
     }
