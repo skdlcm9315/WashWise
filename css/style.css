@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f8fa;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0074D9;
+    color: white;
+    padding: 15px 20px;
+}
+
+header h1 {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+header h1 a {
+    color: white; 
+    text-decoration: none; 
+}
+
+header h1 a:hover {
+    color: white; 
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    margin-right: 20px;
+}
+
+.nav-menu li {
+    position: relative;
+    margin-right: 20px;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.nav-menu a:hover {
+    color: #ffcc00; 
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    background-color: #0074D9;
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+    border-radius: 5px;
+    z-index: 1;
+    white-space: nowrap; 
+}
+
+.dropdown li {
+    margin: 0;
+}
+
+.dropdown li a {
+    padding: 10px 20px;
+    display: inline-block; 
+}
+
+.dropdown li a:hover {
+    text-decoration: underline;
+    color: #ffcc00; 
+}
+
+.services:hover .dropdown,
+.customer-support:hover .dropdown {
+    display: block;
+}
+
+nav button {
+    background-color: #005a9e;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+nav button:hover {
+    background-color: #004480;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+
+.announcement,
+.nearby-car-wash {
+    background-color: white;
+    border: 1px solid #d9e3e8;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #0074D9;
+    margin-bottom: 15px;
+}
+
+.announcement-list {
+    list-style: none;
+}
+
+.announcement-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #d9e3e8;
+    display: flex;
+    justify-content: space-between;
+}
+
+.notice-badge {
+    background-color: #0074D9;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin-right: 10px;
+}
+
+.view-count {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.nearby-car-wash .map-placeholder {
+    background-color: #d9e3e8;
+    color: #333;
+    padding: 50px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.system-description,
+.usage-guide {
+    background-color: white;
+    border: 1px solid #d9e3e8;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.system-description h3,
+.usage-guide h3 {
+    font-size: 1.3em;
+    color: #0074D9;
+    margin-bottom: 15px;
+}
+
+.usage-guide ol {
+    padding-left: 20px; 
+}
+
+.usage-guide li {
+    margin-bottom: 10px; 
+}
+
+.usage-guide li::marker {
+    color: #0074D9; 
+}
