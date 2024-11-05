@@ -17,7 +17,7 @@ function initMap() {
         }
     }, {
         location: map.getCenter(),
-        radius: 5000 // 500km 반경
+        radius: 5000 
     });
 
     function displayCarWashMarkers(carWashList, map) {
@@ -31,7 +31,7 @@ function initMap() {
                 clickable: true
             });
 
-            // 인포윈도우에 표시할 세차장 정보 내용 생성
+            
             const carWashInfo = `
                 <div class="info-window">
                     <strong class="info-title">${carWash.place_name}</strong><br/>
@@ -41,7 +41,7 @@ function initMap() {
                 </div>`;
             const infowindow = new kakao.maps.InfoWindow({ content: carWashInfo });
 
-            // 마커 클릭 이벤트
+            
             kakao.maps.event.addListener(marker, 'click', function () {
                 if (activeInfoWindow) {
                     activeInfoWindow.close();
@@ -50,7 +50,7 @@ function initMap() {
                 activeInfoWindow = infowindow;
             });
 
-            // 지도의 다른 부분을 클릭하면 인포윈도우 닫기
+            
             kakao.maps.event.addListener(map, 'click', function () {
                 if (activeInfoWindow) {
                     activeInfoWindow.close();
@@ -75,7 +75,7 @@ function initMap() {
                 <button class="reserve-button">자세히 보기</button>
             `;
 
-            // 각 항목에 클릭 이벤트 추가
+            
             carWashCard.addEventListener('click', () => {
                 const markerPosition = new kakao.maps.LatLng(carWash.y, carWash.x);
                 map.setCenter(markerPosition);
